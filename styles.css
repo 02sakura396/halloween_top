@@ -77,4 +77,12 @@ body {
   .choice { font-size: 20px; }
 }
 
+/* スマホ向け微調整 */
+@media (max-width: 600px){
+  /* 1cm相当 ≈ 38〜40px 上へ */
+  #site-header { top: calc(34% - 40px); }
+  /* PNGの可視中心を補正（やや左寄せで視覚中央に） */
+  #sakura { left: 50%; transform: translateX(-58%); }
+}
+
 
