@@ -54,22 +54,33 @@ function say(text){
   setTimeout(()=> els.speech.classList.remove('show'), 1200);
 }
 
+// 3秒ごとに吹き出しを表示
+function startSpeechLoop(){
+  if(els._speechTimer) clearInterval(els._speechTimer);
+  els._speechTimer = setInterval(()=>{
+    say('どっちかなぁ…');
+  }, 3000);
+}
+function stopSpeechLoop(){
+  if(els._speechTimer){ clearInterval(els._speechTimer); els._speechTimer = null; }
+}
+
 // 待機時に左右反転をゆっくり繰り返す
 function startThinking(){
   if(!els.sakuraImg) return;
-  els.sakuraImg.style.transition = 'transform 2.2s ease-in-out';
-  let flip = 1;
-  if(els.sakuraImg._thinkingTimer) clearInterval(els.sakuraImg._thinkingTimer);
-  els.sakuraImg._thinkingTimer = setInterval(()=>{
-    flip *= -1;
-    const scaleX = flip;
-    els.sakuraImg.style.transform = `scaleX(${scaleX})`;
-  }, 2400);
+  // 反転したまま静止
+  els.sakuraImg.style.transition = 'transform 300ms ease-out';
+  if(els.sakuraImg._thinkingTimer) {
+    clearInterval(els.sakuraImg._thinkingTimer);
+    els.sakuraImg._thinkingTimer = null;
+  }
+  els.sakuraImg.style.transform = 'scaleX(-1)';
 }
 function stopThinking(){
   if(!els.sakuraImg) return;
   if(els.sakuraImg._thinkingTimer){ clearInterval(els.sakuraImg._thinkingTimer); els.sakuraImg._thinkingTimer = null; }
-  els.sakuraImg.style.transform = 'scaleX(1)';
+  // 静止表示を維持
+  els.sakuraImg.style.transform = 'scaleX(-1)';
 }
 
 async function loadQuestions(){
@@ -92,6 +103,7 @@ function showQuestion(){
   setChoicesEnabled(true);
   say('どっちかなぁ…');
   startThinking();
+  startSpeechLoop();
 }
 
 function endGame(){
@@ -115,6 +127,7 @@ function handleChoice(dir){
   if(!q) return;
   setChoicesEnabled(false);
   stopThinking();
+  stopSpeechLoop();
   playClick();
 
   // 魔法の光を演出

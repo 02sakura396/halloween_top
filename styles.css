@@ -12,7 +12,7 @@ body {
 
 /* ヘッダー画像 */
 #site-header { position: absolute; left: 50%; top: 34%; transform: translateX(-50%); z-index: 2; display: flex; justify-content: center; }
-#site-header img { display: block; width: clamp(280px, 70vw, 640px); height: auto; margin: 6px auto; border-radius: 8px; box-shadow: 0 6px 24px rgba(0,0,0,.35); }
+#site-header img { display: block; width: clamp(320px, 78vw, 720px); height: auto; margin: 6px auto; border-radius: 8px; box-shadow: 0 6px 24px rgba(0,0,0,.35); }
 
 /* 背景 */
 #bg { position: absolute; inset: 0; overflow: hidden; pointer-events: none; z-index: 0; }
@@ -36,8 +36,8 @@ body {
 #question-box { position: absolute; top: 52%; left: 50%; transform: translate(-50%, -60%); width: min(92vw, 720px); background: #120e1dcc; border: 2px solid #ffffff22; border-radius: 16px; padding: 16px; box-shadow: 0 12px 40px rgba(0,0,0,.35); text-align: center; z-index: 2; }
 #question { font-size: 18px; line-height: 1.6; margin: 0; }
 
-#speech { position: absolute; left: calc(100% + 12px); bottom: 12px; transform: translateY(8px); background: #0008; border: 2px solid #fff3; border-radius: 8px; padding: 8px 12px; font-size: 16px; opacity: 0; transition: .3s ease; pointer-events: none; z-index: 2; white-space: nowrap; }
-#speech.show { opacity: 1; transform: translateY(0); }
+#speech { position: absolute; left: 50%; top: calc(60% + 48px); transform: translate(-50%, -50%) translateY(8px); background: #0008; border: 2px solid #fff3; border-radius: 8px; padding: 8px 12px; font-size: 16px; opacity: 0; transition: .3s ease; pointer-events: none; z-index: 2; white-space: nowrap; text-align: center; }
+#speech.show { opacity: 1; transform: translate(-50%, -50%) translateY(0); }
 
 /* 分かれ道 */
 #fork { position: absolute; left: 50%; top: 60%; transform: translate(-50%, -50%); width: min(92vw, 820px); display: grid; grid-template-columns: 1fr 1fr; gap: 16px; z-index: 2; }
@@ -48,7 +48,7 @@ body {
 .choice:disabled { opacity: .6; filter: grayscale(.2); }
 
 /* さくらちゃん（ドット風） */
-#sakura { position: absolute; left: 50%; bottom: 36px; width: 220px; height: auto; transform: translateX(-50%); transform-origin: 50% 100%; pointer-events: none; z-index: 1; }
+#sakura { position: absolute; left: 70%; bottom: 36px; width: 220px; height: auto; transform: translateX(-80%); transform-origin: 50% 100%; pointer-events: none; z-index: 1; }
 #sakura-img { display: block; width: 100%; height: auto; filter: drop-shadow(0 6px 10px rgba(0,0,0,.6)); transform-origin: 50% 50%; }
 @keyframes sway { 0%,100%{transform: rotate(0deg)} 50%{transform: rotate(1deg)} }
 
@@ -82,7 +82,7 @@ body {
   /* 1cm相当 ≈ 38〜40px 上へ */
   #site-header { top: calc(34% - 40px); }
   /* PNGの可視中心を補正（やや左寄せで視覚中央に） */
-  #sakura { left: 50%; transform: translateX(-58%); }
+  #sakura { left: 50%; transform: translateX(-56%); }
 }
 
 
