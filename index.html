@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+  <title>ハロウィン分かれ道クイズ</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div id="game" class="no-select">
+    <header id="site-header" aria-hidden="true">
+      <img src="top.png" onerror="this.onerror=null;this.src='@top.png'" alt="サイトヘッダー" decoding="async" />
+    </header>
+    <div id="bg">
+      <div class="stars"></div>
+      <div class="moon"></div>
+      <div class="pumpkins" aria-hidden="true">🎃 🎃 🎃</div>
+    </div>
+
+    <div id="scene" role="application" aria-label="ハロウィン分かれ道クイズ">
+      <div id="sakura" class="walk" aria-hidden="true">
+        <img id="sakura-img" src="sakura (2).png" alt="さくらちゃん" decoding="async" loading="eager">
+        <div id="speech" aria-live="polite">どっちかなぁ…</div>
+      </div>
+
+      <div id="sparkle" aria-hidden="true"></div>
+
+      
+
+      <div id="question-box">
+        <div id="question">読み込み中…</div>
+      </div>
+
+      <div id="hud">
+        <div id="stage">1 / 5</div>
+      </div>
+
+      <div id="fork">
+        <button id="btn-left" class="choice left" aria-label="左へ">左</button>
+        <button id="btn-right" class="choice right" aria-label="右へ">右</button>
+      </div>
+    </div>
+
+    <div id="overlay" hidden>
+      <div class="panel">
+        <div id="result-title"></div>
+        <div id="result-message"></div>
+        <button id="retry" class="primary">もう一度</button>
+      </div>
+    </div>
+  </div>
+
+  <script type="module" src="main.js"></script>
+</body>
+</html>
+
+

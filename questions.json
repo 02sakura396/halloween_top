@@ -1,0 +1,36 @@
+{
+  "questions": [
+    {
+      "text": "ハロウィンの夜、最初の分かれ道。お菓子をたくさんもらえるのはどっち？",
+      "left": { "label": "静かな森" },
+      "right": { "label": "にぎやかな街" },
+      "answer": "right"
+    },
+    {
+      "text": "黒猫が案内してくれるのはどっちの道？",
+      "left": { "label": "月明かりの道" },
+      "right": { "label": "霧のかかった道" },
+      "answer": "left"
+    },
+    {
+      "text": "かぼちゃランタンがより明るいのは？",
+      "left": { "label": "左の畑" },
+      "right": { "label": "右の門" },
+      "answer": "right"
+    },
+    {
+      "text": "魔法の光がチカチカしてるのは？",
+      "left": { "label": "左の小道" },
+      "right": { "label": "右の橋" },
+      "answer": "left"
+    },
+    {
+      "text": "最後の選択！さくらちゃんが迷わず進むのは？",
+      "left": { "label": "お城の前" },
+      "right": { "label": "屋敷の裏" },
+      "answer": "left"
+    }
+  ]
+}
+
+
