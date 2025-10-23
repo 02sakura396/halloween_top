@@ -33,21 +33,21 @@ body {
 #hud { position: absolute; top: 12px; left: 12px; right: 12px; display: flex; justify-content: space-between; gap: 8px; font-weight: 700; text-shadow: 0 2px 8px #000; }
 
 /* 中央の問題ボックス */
-#question-box { position: absolute; top: 38%; left: 50%; transform: translate(-50%, -50%); width: min(92vw, 720px); background: #120e1dcc; border: 2px solid #ffffff22; border-radius: 16px; padding: 16px; box-shadow: 0 12px 40px rgba(0,0,0,.35); text-align: center; z-index: 2; }
+#question-box { position: absolute; top: 48%; left: 50%; transform: translate(-50%, -50%); width: min(92vw, 720px); background: #120e1dcc; border: 2px solid #ffffff22; border-radius: 16px; padding: 16px; box-shadow: 0 12px 40px rgba(0,0,0,.35); text-align: center; z-index: 2; }
 #question-number { font-size: 20px; font-weight: 700; color: #ff9bd0; margin-bottom: 8px; }
 #question { font-size: 18px; line-height: 1.6; margin: 0; }
 
-#speech { position: absolute; left: 50%; top: calc(58% + 80px); transform: translate(-50%, -50%) translateY(8px); background: #0008; border: 2px solid #fff3; border-radius: 8px; padding: 8px 12px; font-size: 16px; opacity: 0; transition: .3s ease; pointer-events: none; z-index: 2; white-space: nowrap; text-align: center; }
+#speech { position: absolute; left: 50%; top: calc(68% + 80px); transform: translate(-50%, -50%) translateY(8px); background: #0008; border: 2px solid #fff3; border-radius: 8px; padding: 8px 12px; font-size: 16px; opacity: 0; transition: .3s ease; pointer-events: none; z-index: 2; white-space: nowrap; text-align: center; }
 #speech.show { opacity: 1; transform: translate(-50%, -50%) translateY(0); }
 
 /* 分かれ道 */
-#fork { position: absolute; left: 50%; top: 58%; transform: translate(-50%, -50%); width: min(92vw, 820px); display: grid; grid-template-columns: 1fr 1fr; gap: 12px; z-index: 2; }
+#fork { position: absolute; left: 50%; top: 68%; transform: translate(-50%, -50%); width: min(92vw, 820px); display: grid; grid-template-columns: 1fr 1fr; gap: 12px; z-index: 2; }
 .choice { appearance: none; border: 0; background: linear-gradient(135deg, #6b3fa0, #3a285f); color: #fff; padding: 14px; border-radius: 12px; font-size: 16px; box-shadow: 0 6px 0 #140f23; transition: transform .05s ease, box-shadow .05s ease, background .2s; touch-action: manipulation; pointer-events: auto; display: block; cursor: pointer; font-family: inherit; }
 .choice:active { transform: translateY(4px); box-shadow: 0 2px 0 #140f23; }
 .choice:disabled { opacity: .6; filter: grayscale(.2); cursor: not-allowed; }
 
 /* さくらちゃん（ドット風） */
-#sakura { position: absolute; left: 70%; bottom: 36px; width: 220px; height: auto; transform: translateX(-80%); transform-origin: 50% 100%; pointer-events: none; z-index: 1; }
+#sakura { position: absolute; left: 50%; bottom: 20px; width: 220px; height: auto; transform: translateX(-50%); transform-origin: 50% 100%; pointer-events: none; z-index: 1; }
 #sakura-img { display: block; width: 100%; height: auto; filter: drop-shadow(0 6px 10px rgba(0,0,0,.6)); transform-origin: 50% 50%; }
 @keyframes sway { 0%,100%{transform: rotate(0deg)} 50%{transform: rotate(1deg)} }
 
@@ -77,7 +77,7 @@ body {
 /* モバイル調整 */
 @media (min-width: 768px){
   #site-header { top: 20%; }
-  #question-box { top: 40%; }
+  #question-box { top: 50%; }
   #question { font-size: 20px; }
   .choice { font-size: 20px; }
 }
@@ -85,8 +85,8 @@ body {
 /* スマホ向け微調整 */
 @media (max-width: 600px){
   #site-header { top: 18%; }
-  /* PNGの可視中心を補正（やや左寄せで視覚中央に） */
-  #sakura { left: 50%; transform: translateX(-56%); }
+  /* キャラクターを中央に */
+  #sakura { left: 50%; transform: translateX(-50%); }
 }
 
 

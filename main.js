@@ -26,6 +26,7 @@ const els = {
   resultMessage: document.getElementById('result-message'),
   resultImage: document.getElementById('result-image'),
   retry: document.getElementById('retry'),
+  passwordLink: document.getElementById('password-link'),
   startAnimation: document.getElementById('start-animation'),
   startText: document.getElementById('start-text'),
 };
@@ -234,10 +235,14 @@ function endGame(){
     els.resultImage.style.display = 'block';
     els.resultTitle.textContent = '全問正解！おめでとうー！！';
     els.resultMessage.textContent = '秘密の合言葉は「sakura251023」';
+    els.retry.style.display = 'none';
+    els.passwordLink.style.display = 'inline-block';
   } else {
     els.resultImage.style.display = 'none';
     els.resultTitle.textContent = '残念！';
     els.resultMessage.textContent = '全問正解まで頑張ってね！';
+    els.retry.style.display = 'inline-block';
+    els.passwordLink.style.display = 'none';
   }
   
   els.overlay.hidden = false;
