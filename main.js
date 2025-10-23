@@ -96,72 +96,72 @@ async function loadQuestions(){
   const questionsData = {
     "questions": [
       {
-        "text": "ハロウィンの夜、最初の分かれ道。お菓子をたくさんもらえるのはどこ？",
+        "text": "さくらの今回のほんね通信は第何号？",
         "choices": [
-          { "label": "静かな森" },
-          { "label": "にぎやかな街" },
-          { "label": "古いお寺" },
-          { "label": "暗い洞窟" }
+          { "label": "５号" },
+          { "label": "７号" },
+          { "label": "８号" },
+          { "label": "９号" }
+        ],
+        "answer": 2
+      },
+      {
+        "text": "さくらの好きな男性のタイプは？",
+        "choices": [
+          { "label": "イケメン" },
+          { "label": "おじさん" },
+          { "label": "お金持ち" },
+          { "label": "優しい人" }
         ],
         "answer": 1
       },
       {
-        "text": "黒猫が案内してくれるのはどの道？",
+        "text": "さくらの好きなアーティストは？",
         "choices": [
-          { "label": "月明かりの道" },
-          { "label": "霧のかかった道" },
-          { "label": "星空の道" },
-          { "label": "花畑の道" }
+          { "label": "TWICE" },
+          { "label": "乃木坂" },
+          { "label": "YOASOBI" },
+          { "label": "いきものがかり" }
+        ],
+        "answer": 2
+      },
+      {
+        "text": "さくらの好きなうまい棒の味は？",
+        "choices": [
+          { "label": "コンポタージュ" },
+          { "label": "チーズ" },
+          { "label": "たこ焼き" },
+          { "label": "サラミ" }
         ],
         "answer": 0
       },
       {
-        "text": "かぼちゃランタンがより明るいのは？",
+        "text": "さくらが褒められると喜ぶところは？",
         "choices": [
-          { "label": "左の畑" },
-          { "label": "右の門" },
-          { "label": "中央の広場" },
-          { "label": "奥の小屋" }
+          { "label": "顔" },
+          { "label": "胸" },
+          { "label": "おしり" },
+          { "label": "脚" }
         ],
         "answer": 1
       },
       {
-        "text": "魔法の光がチカチカしてるのは？",
+        "text": "さくらは週に何回ひとりでしてるでしょう！",
         "choices": [
-          { "label": "左の小道" },
-          { "label": "右の橋" },
-          { "label": "噴水の周り" },
-          { "label": "木の上" }
+          { "label": "０回" },
+          { "label": "１回" },
+          { "label": "３回" },
+          { "label": "毎日" }
         ],
-        "answer": 0
+        "answer": 3
       },
       {
-        "text": "魔女が住んでいるのはどこ？",
+        "text": "さくらが得意な技は？",
         "choices": [
-          { "label": "お城の前" },
-          { "label": "屋敷の裏" },
-          { "label": "湖のほとり" },
-          { "label": "丘の上" }
-        ],
-        "answer": 0
-      },
-      {
-        "text": "どの道が一番ワクワクする？",
-        "choices": [
-          { "label": "光る階段" },
-          { "label": "音のない路地" },
-          { "label": "虹色の橋" },
-          { "label": "秘密の通路" }
-        ],
-        "answer": 0
-      },
-      {
-        "text": "月に一番近づけるのは？",
-        "choices": [
-          { "label": "高い塔" },
-          { "label": "深い森" },
-          { "label": "大きな木" },
-          { "label": "雲の上" }
+          { "label": "Y字バランス" },
+          { "label": "倒立" },
+          { "label": "でんぐり返し" },
+          { "label": "M字開脚" }
         ],
         "answer": 0
       }
@@ -233,7 +233,7 @@ function endGame(){
     els.resultImage.src = 'seikai.png';
     els.resultImage.style.display = 'block';
     els.resultTitle.textContent = '全問正解！おめでとうー！！';
-    els.resultMessage.textContent = '秘密の合言葉は「テスト」';
+    els.resultMessage.textContent = '秘密の合言葉は「sakura251023」';
   } else {
     els.resultImage.style.display = 'none';
     els.resultTitle.textContent = '残念！';
