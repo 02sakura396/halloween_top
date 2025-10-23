@@ -59,7 +59,7 @@ function startSpeechLoop(){
   if(els._speechTimer) clearInterval(els._speechTimer);
   els._speechTimer = setInterval(()=>{
     say('どっちかなぁ…');
-  }, 3000);
+  }, 10000);
 }
 function stopSpeechLoop(){
   if(els._speechTimer){ clearInterval(els._speechTimer); els._speechTimer = null; }
@@ -86,7 +86,7 @@ function stopThinking(){
 async function loadQuestions(){
   const res = await fetch('questions.json', { cache: 'no-store' });
   const data = await res.json();
-  state.questions = data.questions.slice(0, 5);
+  state.questions = data.questions.slice(0, 7);
 }
 
 function setChoicesEnabled(enabled){
@@ -112,10 +112,10 @@ function endGame(){
   const total = state.questions.length;
   const correct = state.correctCount;
   const allCorrect = correct === total;
-  const title = allCorrect ? 'あなたは全問正解です！' : `結果発表`;
+  const title = allCorrect ? 'あなたは全問正解です！' : '残念！';
   const message = allCorrect
     ? '秘密の合言葉は「テスト」'
-    : `正解数：${correct} / ${total}\nまた挑戦してね！`;
+    : '全問正解まで頑張ってね！';
   els.resultTitle.textContent = title;
   els.resultMessage.textContent = message;
   els.overlay.hidden = false;

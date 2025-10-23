@@ -29,6 +29,18 @@
       "left": { "label": "お城の前" },
       "right": { "label": "屋敷の裏" },
       "answer": "left"
+    },
+    {
+      "text": "どの道が一番ワクワクする？",
+      "left": { "label": "光る階段" },
+      "right": { "label": "音のない路地" },
+      "answer": "left"
+    },
+    {
+      "text": "月に一番近づけるのは？",
+      "left": { "label": "高い塔" },
+      "right": { "label": "深い森" },
+      "answer": "left"
     }
   ]
 }

@@ -11,7 +11,7 @@ body {
 #game { position: relative; height: 100dvh; overflow: hidden; }
 
 /* ヘッダー画像 */
-#site-header { position: absolute; left: 50%; top: 34%; transform: translateX(-50%); z-index: 2; display: flex; justify-content: center; }
+#site-header { position: absolute; left: 50%; top: 30%; transform: translateX(-50%); z-index: 2; display: flex; justify-content: center; }
 #site-header img { display: block; width: clamp(320px, 78vw, 720px); height: auto; margin: 6px auto; border-radius: 8px; box-shadow: 0 6px 24px rgba(0,0,0,.35); }
 
 /* 背景 */
@@ -71,7 +71,7 @@ body {
 
 /* モバイル調整 */
 @media (min-width: 768px){
-  #site-header { top: 28%; }
+  #site-header { top: 24%; }
   #question-box { top: 50%; }
   #question { font-size: 20px; }
   .choice { font-size: 20px; }
