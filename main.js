@@ -20,6 +20,8 @@ const els = {
   resultTitle: document.getElementById('result-title'),
   resultMessage: document.getElementById('result-message'),
   retry: document.getElementById('retry'),
+  startAnimation: document.getElementById('start-animation'),
+  startText: document.getElementById('start-text'),
 };
 
 // 簡易SE
@@ -159,7 +161,7 @@ function handleChoice(dir){
     } else {
       showQuestion();
     }
-  }, 420);
+  }, 2000);
 }
 
 function resetGame(){
@@ -174,6 +176,21 @@ function resetGame(){
   showQuestion();
 }
 
+async function showStartAnimation(){
+  const messages = ['ハロウィンクイズ🎃', '準備はいいかな？', 'それでは', 'よーい', 'スタート！'];
+  
+  for(const msg of messages){
+    els.startText.textContent = msg;
+    // アニメーションを再トリガー
+    els.startText.style.animation = 'none';
+    void els.startText.offsetWidth; // リフロー
+    els.startText.style.animation = 'fadeInOut 1s ease-in-out';
+    await new Promise(resolve => setTimeout(resolve, 1000));
+  }
+  
+  els.startAnimation.classList.add('hidden');
+}
+
 function bind(){
   els.left.addEventListener('click', ()=> handleChoice('left'));
   els.right.addEventListener('click', ()=> handleChoice('right'));
@@ -185,6 +202,7 @@ function bind(){
   bind();
   await loadQuestions();
   updateHUD();
+  await showStartAnimation();
   showQuestion();
 })();
 

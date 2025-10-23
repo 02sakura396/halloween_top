@@ -11,7 +11,7 @@ body {
 #game { position: relative; height: 100dvh; overflow: hidden; }
 
 /* ヘッダー画像 */
-#site-header { position: absolute; left: 50%; top: 30%; transform: translateX(-50%); z-index: 2; display: flex; justify-content: center; }
+#site-header { position: absolute; left: 50%; top: 20%; transform: translateX(-50%); z-index: 2; display: flex; justify-content: center; }
 #site-header img { display: block; width: clamp(320px, 78vw, 720px); height: auto; margin: 6px auto; border-radius: 8px; box-shadow: 0 6px 24px rgba(0,0,0,.35); }
 
 /* 背景 */
@@ -69,9 +69,15 @@ body {
 .primary { appearance: none; border: 0; background: linear-gradient(180deg, #ff9bd0, #ff5fa2); color: #2b2140; font-weight: 800; padding: 12px 16px; border-radius: 12px; box-shadow: 0 6px 0 #8d2d5b; }
 .primary:active { transform: translateY(3px); box-shadow: 0 3px 0 #8d2d5b; }
 
+/* スタート画面アニメーション */
+#start-animation { position: fixed; inset: 0; background: rgba(0,0,0,.95); display: grid; place-items: center; z-index: 100; pointer-events: none; }
+#start-animation.hidden { display: none; }
+#start-text { font-size: 32px; font-weight: 700; color: #fff; text-align: center; animation: fadeInOut 1s ease-in-out; }
+@keyframes fadeInOut { 0%{opacity:0; transform: scale(.8)} 20%{opacity:1; transform: scale(1)} 80%{opacity:1; transform: scale(1)} 100%{opacity:0; transform: scale(1.2)} }
+
 /* モバイル調整 */
 @media (min-width: 768px){
-  #site-header { top: 24%; }
+  #site-header { top: 16%; }
   #question-box { top: 50%; }
   #question { font-size: 20px; }
   .choice { font-size: 20px; }
@@ -80,7 +86,7 @@ body {
 /* スマホ向け微調整 */
 @media (max-width: 600px){
   /* 1cm相当 ≈ 38〜40px 上へ */
-  #site-header { top: calc(34% - 40px); }
+  #site-header { top: calc(20% - 40px); }
   /* PNGの可視中心を補正（やや左寄せで視覚中央に） */
   #sakura { left: 50%; transform: translateX(-56%); }
 }
