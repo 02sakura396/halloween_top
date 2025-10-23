@@ -9,9 +9,14 @@ const state = {
 
 const els = {
   stage: document.getElementById('stage'),
+  questionNumber: document.getElementById('question-number'),
   question: document.getElementById('question'),
-  left: document.getElementById('btn-left'),
-  right: document.getElementById('btn-right'),
+  choices: [
+    document.getElementById('btn-0'),
+    document.getElementById('btn-1'),
+    document.getElementById('btn-2'),
+    document.getElementById('btn-3')
+  ],
   sparkle: document.getElementById('sparkle'),
   sakura: document.getElementById('sakura'),
   sakuraImg: document.getElementById('sakura-img'),
@@ -19,6 +24,7 @@ const els = {
   overlay: document.getElementById('overlay'),
   resultTitle: document.getElementById('result-title'),
   resultMessage: document.getElementById('result-message'),
+  resultImage: document.getElementById('result-image'),
   retry: document.getElementById('retry'),
   startAnimation: document.getElementById('start-animation'),
   startText: document.getElementById('start-text'),
@@ -92,18 +98,36 @@ async function loadQuestions(){
 }
 
 function setChoicesEnabled(enabled){
-  els.left.disabled = !enabled;
-  els.right.disabled = !enabled;
+  els.choices.forEach(btn => {
+    if(btn) btn.disabled = !enabled;
+  });
+}
+
+function getQuestionNumberText(index){
+  const numbers = ['一', '二', '三', '四', '五', '六', '七', '八', '九', '十'];
+  return `第${numbers[index] || (index + 1)}問`;
 }
 
 function showQuestion(){
   const q = state.questions[state.stage];
   if(!q){ return; }
+  
+  // 問題番号を更新
+  els.questionNumber.textContent = getQuestionNumberText(state.stage);
   els.question.textContent = q.text;
-  els.left.textContent = q.left.label || '左';
-  els.right.textContent = q.right.label || '右';
+  
+  // 4つの選択肢を表示
+  if(q.choices && q.choices.length === 4){
+    q.choices.forEach((choice, i) => {
+      if(els.choices[i]){
+        els.choices[i].textContent = choice.label;
+        els.choices[i].style.display = 'block';
+      }
+    });
+  }
+  
   setChoicesEnabled(true);
-  say('どっちかなぁ…');
+  say('どれかなぁ…');
   startThinking();
   startSpeechLoop();
 }
@@ -114,16 +138,22 @@ function endGame(){
   const total = state.questions.length;
   const correct = state.correctCount;
   const allCorrect = correct === total;
-  const title = allCorrect ? 'あなたは全問正解です！' : '残念！';
-  const message = allCorrect
-    ? '秘密の合言葉は「テスト」'
-    : '全問正解まで頑張ってね！';
-  els.resultTitle.textContent = title;
-  els.resultMessage.textContent = message;
+  
+  if(allCorrect){
+    els.resultImage.src = 'seikai.png';
+    els.resultImage.style.display = 'block';
+    els.resultTitle.textContent = '全問正解！おめでとうー！！';
+    els.resultMessage.textContent = '秘密の合言葉は「テスト」';
+  } else {
+    els.resultImage.style.display = 'none';
+    els.resultTitle.textContent = '残念！';
+    els.resultMessage.textContent = '全問正解まで頑張ってね！';
+  }
+  
   els.overlay.hidden = false;
 }
 
-function handleChoice(dir){
+function handleChoice(choiceIndex){
   if(state.ended) return;
   const q = state.questions[state.stage];
   if(!q) return;
@@ -133,19 +163,19 @@ function handleChoice(dir){
   playClick();
 
   // 魔法の光を演出
-  const btn = dir === 'left' ? els.left : els.right;
-  const targetX = window.innerWidth * (dir === 'left' ? 0.2 : 0.8);
+  const btn = els.choices[choiceIndex];
+  const targetX = window.innerWidth * 0.5;
   const targetY = window.innerHeight * 0.35;
   setSparkle(btn, targetX, targetY);
   playMagic();
 
-  const isCorrect = q.answer === dir;
+  const isCorrect = q.answer === choiceIndex;
   if(isCorrect) state.correctCount += 1;
-  state.pathChosen.push(dir);
-  state.answers.push({ stage: state.stage, chosen: dir, correct: q.answer });
+  state.pathChosen.push(choiceIndex);
+  state.answers.push({ stage: state.stage, chosen: choiceIndex, correct: q.answer });
 
   // 歩く演出（少し前進）
-  els.sakura.style.transform = `translateX(${(state.stage*8) + (dir==='left'?-4:4)}px)`;
+  els.sakura.style.transform = `translateX(${(state.stage*8)}px)`;
 
   setTimeout(()=>{
     if(!isCorrect){
@@ -192,14 +222,19 @@ async function showStartAnimation(){
 }
 
 function bind(){
-  els.left.addEventListener('click', ()=> handleChoice('left'));
-  els.right.addEventListener('click', ()=> handleChoice('right'));
+  els.choices.forEach((btn, index) => {
+    if(btn){
+      btn.addEventListener('click', ()=> handleChoice(index));
+    }
+  });
   els.retry.addEventListener('click', resetGame);
   // 効果音なし
 }
 
 (async function init(){
   bind();
+  // スタートアニメーション中は選択肢を無効化
+  setChoicesEnabled(false);
   await loadQuestions();
   updateHUD();
   await showStartAnimation();
