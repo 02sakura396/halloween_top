@@ -92,9 +92,84 @@ function stopThinking(){
 }
 
 async function loadQuestions(){
-  const res = await fetch('questions.json', { cache: 'no-store' });
-  const data = await res.json();
-  state.questions = data.questions.slice(0, 7);
+  // ローカルファイルでも動作するように、questions.jsonの内容を直接埋め込み
+  const questionsData = {
+    "questions": [
+      {
+        "text": "ハロウィンの夜、最初の分かれ道。お菓子をたくさんもらえるのはどこ？",
+        "choices": [
+          { "label": "静かな森" },
+          { "label": "にぎやかな街" },
+          { "label": "古いお寺" },
+          { "label": "暗い洞窟" }
+        ],
+        "answer": 1
+      },
+      {
+        "text": "黒猫が案内してくれるのはどの道？",
+        "choices": [
+          { "label": "月明かりの道" },
+          { "label": "霧のかかった道" },
+          { "label": "星空の道" },
+          { "label": "花畑の道" }
+        ],
+        "answer": 0
+      },
+      {
+        "text": "かぼちゃランタンがより明るいのは？",
+        "choices": [
+          { "label": "左の畑" },
+          { "label": "右の門" },
+          { "label": "中央の広場" },
+          { "label": "奥の小屋" }
+        ],
+        "answer": 1
+      },
+      {
+        "text": "魔法の光がチカチカしてるのは？",
+        "choices": [
+          { "label": "左の小道" },
+          { "label": "右の橋" },
+          { "label": "噴水の周り" },
+          { "label": "木の上" }
+        ],
+        "answer": 0
+      },
+      {
+        "text": "魔女が住んでいるのはどこ？",
+        "choices": [
+          { "label": "お城の前" },
+          { "label": "屋敷の裏" },
+          { "label": "湖のほとり" },
+          { "label": "丘の上" }
+        ],
+        "answer": 0
+      },
+      {
+        "text": "どの道が一番ワクワクする？",
+        "choices": [
+          { "label": "光る階段" },
+          { "label": "音のない路地" },
+          { "label": "虹色の橋" },
+          { "label": "秘密の通路" }
+        ],
+        "answer": 0
+      },
+      {
+        "text": "月に一番近づけるのは？",
+        "choices": [
+          { "label": "高い塔" },
+          { "label": "深い森" },
+          { "label": "大きな木" },
+          { "label": "雲の上" }
+        ],
+        "answer": 0
+      }
+    ]
+  };
+  
+  state.questions = questionsData.questions.slice(0, 7);
+  console.log('Loaded questions:', state.questions.length);
 }
 
 function setChoicesEnabled(enabled){
@@ -109,24 +184,39 @@ function getQuestionNumberText(index){
 }
 
 function showQuestion(){
+  console.log('showQuestion called, stage:', state.stage, 'total questions:', state.questions.length);
   const q = state.questions[state.stage];
-  if(!q){ return; }
+  if(!q){ 
+    console.error('Question not found for stage:', state.stage);
+    return; 
+  }
+  
+  console.log('Current question:', q);
   
   // 問題番号を更新
   els.questionNumber.textContent = getQuestionNumberText(state.stage);
   els.question.textContent = q.text;
+  console.log('Question text set:', q.text);
   
   // 4つの選択肢を表示
-  if(q.choices && q.choices.length === 4){
-    q.choices.forEach((choice, i) => {
-      if(els.choices[i]){
-        els.choices[i].textContent = choice.label;
+  if(q.choices && q.choices.length >= 4){
+    console.log('Setting up choices...');
+    for(let i = 0; i < 4; i++){
+      if(els.choices[i] && q.choices[i]){
+        els.choices[i].textContent = q.choices[i].label;
         els.choices[i].style.display = 'block';
+        els.choices[i].style.visibility = 'visible';
+        console.log(`Choice ${i} set:`, q.choices[i].label);
+      } else {
+        console.warn(`Choice ${i} element or data missing`);
       }
-    });
+    }
+  } else {
+    console.error('Question does not have 4 choices:', q);
   }
   
   setChoicesEnabled(true);
+  console.log('Choices enabled');
   say('どれかなぁ…');
   startThinking();
   startSpeechLoop();
@@ -191,7 +281,7 @@ function handleChoice(choiceIndex){
     } else {
       showQuestion();
     }
-  }, 2000);
+  }, 1000);
 }
 
 function resetGame(){
@@ -218,7 +308,10 @@ async function showStartAnimation(){
     await new Promise(resolve => setTimeout(resolve, 1000));
   }
   
+  // 少し待機してから非表示にする
+  await new Promise(resolve => setTimeout(resolve, 200));
   els.startAnimation.classList.add('hidden');
+  console.log('Start animation completed');
 }
 
 function bind(){
@@ -232,13 +325,19 @@ function bind(){
 }
 
 (async function init(){
+  console.log('Init started');
   bind();
   // スタートアニメーション中は選択肢を無効化
   setChoicesEnabled(false);
+  console.log('Loading questions...');
   await loadQuestions();
+  console.log('Questions loaded:', state.questions);
   updateHUD();
+  console.log('Starting animation...');
   await showStartAnimation();
+  console.log('Showing question...');
   showQuestion();
+  console.log('Init completed');
 })();
 
 

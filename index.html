@@ -30,6 +30,7 @@
       
 
       <div id="question-box">
+        <div id="question-number">第一問</div>
         <div id="question">読み込み中…</div>
       </div>
 
@@ -38,8 +39,10 @@
       </div>
 
       <div id="fork">
-        <button id="btn-left" class="choice left" aria-label="左へ">左</button>
-        <button id="btn-right" class="choice right" aria-label="右へ">右</button>
+        <button id="btn-0" class="choice" data-index="0" aria-label="選択肢1">選択肢1</button>
+        <button id="btn-1" class="choice" data-index="1" aria-label="選択肢2">選択肢2</button>
+        <button id="btn-2" class="choice" data-index="2" aria-label="選択肢3">選択肢3</button>
+        <button id="btn-3" class="choice" data-index="3" aria-label="選択肢4">選択肢4</button>
       </div>
 
       <div id="speech" aria-live="polite">どっちかなぁ…</div>
@@ -47,6 +50,7 @@
 
     <div id="overlay" hidden>
       <div class="panel">
+        <img id="result-image" src="" alt="" style="display: none; width: 100%; max-width: 400px; margin: 0 auto 16px; border-radius: 12px;">
         <div id="result-title"></div>
         <div id="result-message"></div>
         <button id="retry" class="primary">もう一度</button>
@@ -58,7 +62,7 @@
     </div>
   </div>
 
-  <script type="module" src="main.js"></script>
+  <script src="main.js"></script>
 </body>
 </html>
 
