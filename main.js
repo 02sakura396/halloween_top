@@ -26,6 +26,7 @@ const els = {
   resultMessage: document.getElementById('result-message'),
   resultImage: document.getElementById('result-image'),
   retry: document.getElementById('retry'),
+  copyPassword: document.getElementById('copy-password'),
   passwordLink: document.getElementById('password-link'),
   startAnimation: document.getElementById('start-animation'),
   startText: document.getElementById('start-text'),
@@ -236,12 +237,14 @@ function endGame(){
     els.resultTitle.textContent = '全問正解！おめでとうー！！';
     els.resultMessage.textContent = '秘密の合言葉は「sakura251023」';
     els.retry.style.display = 'none';
+    els.copyPassword.style.display = 'inline-block';
     els.passwordLink.style.display = 'inline-block';
   } else {
     els.resultImage.style.display = 'none';
     els.resultTitle.textContent = '残念！';
     els.resultMessage.textContent = '全問正解まで頑張ってね！';
     els.retry.style.display = 'inline-block';
+    els.copyPassword.style.display = 'none';
     els.passwordLink.style.display = 'none';
   }
   
@@ -319,6 +322,28 @@ async function showStartAnimation(){
   console.log('Start animation completed');
 }
 
+function copyPasswordToClipboard(){
+  const password = 'sakura251023';
+  
+  // クリップボードにコピー
+  if(navigator.clipboard && navigator.clipboard.writeText){
+    navigator.clipboard.writeText(password).then(()=>{
+      // コピー成功
+      const originalText = els.copyPassword.textContent;
+      els.copyPassword.textContent = '✅ コピーしました！';
+      setTimeout(()=>{
+        els.copyPassword.textContent = originalText;
+      }, 2000);
+    }).catch(err => {
+      console.error('Failed to copy:', err);
+      alert('パスワード: sakura251023');
+    });
+  } else {
+    // フォールバック: アラート表示
+    alert('パスワード: sakura251023');
+  }
+}
+
 function bind(){
   els.choices.forEach((btn, index) => {
     if(btn){
@@ -326,6 +351,7 @@ function bind(){
     }
   });
   els.retry.addEventListener('click', resetGame);
+  els.copyPassword.addEventListener('click', copyPasswordToClipboard);
   // 効果音なし
 }
 
